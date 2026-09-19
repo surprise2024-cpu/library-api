@@ -1,5 +1,6 @@
 import express from 'express';
 import authorsRoutes from './routes/authorsRoutes.js'
+import { logger } from './middleware/logger.js';
 
 // creating the express app
 const app = express();
@@ -9,6 +10,9 @@ const PORT = 4000;
 
 // allow our express server to understand JSON requests
 app.use(express.json());
+
+// tells express to run the logger middleware for every incoming request
+app.use(logger);
 
 // makes each route inside authorsRoutes.ts start with (/authors)
 app.use('/authors', authorsRoutes);
