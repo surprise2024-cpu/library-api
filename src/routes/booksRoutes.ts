@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authors, books } from "../data/store.js";
 import { validateBook } from "../middleware/validateBook.js";
+import { validateBookUpdate } from "../middleware/validateBookUpdate.js";
 
 
 const router = Router();
@@ -74,7 +75,7 @@ router.get('/:id', (req, res) => {
 
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateBookUpdate, (req, res) => {
 
     const id = Number(req.params.id);
 

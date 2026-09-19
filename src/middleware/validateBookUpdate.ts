@@ -11,21 +11,21 @@ export const validateBookUpdate = (
 
     const { title, year, authorId } = req.body;
 
-    if (!title || typeof title !== 'string' || title.trim()  === '') {
+    if (title !== undefined && (typeof title !== 'string' || title.trim()  === '')) {
         return res.status(400).json({
             success: false,
             error: 'Book title is required'
         });
     }
 
-    if (year !== undefined || typeof year !== 'number') {
+    if (year !== undefined && typeof year !== 'number') {
         return res.status(400).json({
             success: false,
             error: 'Book year must be a number'
         });
     }
 
-    if (authorId === undefined || typeof authorId !== 'number') {
+    if (authorId !== undefined && typeof authorId !== 'number') {
         return res.status(400).json({
             success: false,
             error: 'authorId must be a number'
