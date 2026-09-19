@@ -10,15 +10,15 @@ const PORT = 4000;
 // allow our express server to understand JSON requests
 app.use(express.json());
 
+// makes each route inside authorsRoutes.ts start with (/authors)
+app.use('/authors', authorsRoutes);
+
 // creates the apps first route
 app.get('/', (req, res) => {
     res.json({
         message: 'Library API is running'
     });
 });
-
-// makes each route inside authorsRoutes.ts start with (/authors)
-app.use('/authors', authorsRoutes);
 
 // this actually starts the server.
 app.listen(PORT, () => {
