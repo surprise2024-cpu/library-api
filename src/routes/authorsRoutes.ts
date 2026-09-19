@@ -81,5 +81,31 @@ router.put('/:id', (req, res) => {
     });
 
 });
+
+// route for deleting an author using their id
+router.delete('/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const authorIndex = authors.findIndex((author) => author.id === id);
+
+    if (authorIndex === -1) {
+        return res.status(404).json({
+            success: false,
+            error: 'Author not found'
+        });
+    }
+
+    // splice removes items from an array
+    const deleteAuthor = authors.splice(authorIndex, 10);
+
+    res.status(200).json({
+        success: true,
+        data: deleteAuthor[0]
+    });
+});
+
+
+
 // makes the router available to use all over the app
 export default router;
