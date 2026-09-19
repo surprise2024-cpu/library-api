@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { authors } from "../data/store.js";
+import { validateAuthor } from "../middleware/validateAuthor.js";
 
 // creating a new router object
 const router = Router();
 
 // creating the post route
-router.post('/', (req, res) => {
+router.post('/', validateAuthor , (req, res) => {
 
     // gets the name from the JSON body
     const { name } = req.body;
@@ -58,7 +59,7 @@ router.get('/:id', (req, res) => {
 });
 
 // router to update an authors information
-router.put('/:id', (req, res) => {
+router.put('/:id', validateAuthor, (req, res) => {
 
     const id = Number(req.params.id);
 
