@@ -105,7 +105,5 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-
-
 // makes the router available to use all over the app
 export default router;

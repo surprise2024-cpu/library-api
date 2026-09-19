@@ -44,4 +44,108 @@ router.post('/', (req, res) => {
 
 });
 
+router.get('/', (req, res) => {
+
+    res.status(200).json({
+        success: true,
+        data: books
+    });
+});
+
+// router for getting an author by their id
+router.get('/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const book = books.find((book) => book.id === id );
+
+    if (!book) {
+
+        return res.status(404).json({
+            success: false,
+            error: 'Book not found'
+        });
+    }
+
+    res.status(200).json({
+        success: true,
+        data: book
+    });
+
+});
+
+router.put('/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const book = books.find((book) => book.id === id);
+
+    if (!book) {
+        return res.status(404).json({
+            success: false,
+            error: 'Book not found'
+        });
+    }
+
+    const { title, year, authorId } = req.body;
+
+    if (authorId !== undefined) {
+
+        const authorExists = authors.some(
+
+            (author) => author.id === authorId
+        );
+
+        if (!authorExists) {
+            return res.status(400).json({
+                success: false,
+                error: 'Invalid authorId'
+            });
+        }
+    }
+
+    if (title !== undefined) {
+        book.title = title;
+    }
+
+    if (year !== undefined) {
+        book.year = year;
+    }
+
+    if (authorId !== undefined) {
+        book.authorId = authorId;
+    }
+
+    res.status(200).json({
+        success: true,
+        data: book
+    });
+
+});
+
+// route for deleting a bok using its id
+router.delete('/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const bookIndex = books.findIndex((book) => book.id === id);
+
+    if (bookIndex === -1) {
+        return res.status(404).json({
+            success: false,
+            error: 'Book not found'
+        });
+    }
+
+    // splice removes items from an array
+    const deleteBook = authors.splice(bookIndex, 10);
+
+    // shows us the deleted book
+    res.status(200).json({
+        success: true,
+        data: deleteBook[0]
+    });
+    
+});
+
 export default router;
