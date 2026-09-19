@@ -26,5 +26,14 @@ router.post('/', (req, res) => {
     });
 });
 
+// router for getting/displaying all the authors
+router.get('/', (req, res) => {
+
+    res.status(200).json({
+        success: true,
+        data: authors
+    });
+});
+
 // makes the router available to use all over the app
 export default router;
