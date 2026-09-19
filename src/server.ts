@@ -1,4 +1,5 @@
 import express from 'express';
+import authorsRoutes from './routes/authorsRoutes.js'
 
 // creating the express app
 const app = express();
@@ -15,6 +16,9 @@ app.get('/', (req, res) => {
         message: 'Library API is running'
     });
 });
+
+// makes each route inside authorsRoutes.ts start with (/authors)
+app.use('/authors', authorsRoutes);
 
 // this actually starts the server.
 app.listen(PORT, () => {
