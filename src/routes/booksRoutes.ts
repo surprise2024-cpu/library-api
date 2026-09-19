@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { authors, books } from "../data/store.js";
-import { error } from "node:console";
+import { validateBook } from "../middleware/validateBook.js";
 
 
 const router = Router();
 
 // creating the post route
-router.post('/', (req, res) => {
+router.post('/', validateBook, (req, res) => {
 
     // gets the name from the JSON body
     const { title, year, authorId } = req.body;
@@ -145,7 +145,7 @@ router.delete('/:id', (req, res) => {
         success: true,
         data: deleteBook[0]
     });
-    
+
 });
 
 export default router;

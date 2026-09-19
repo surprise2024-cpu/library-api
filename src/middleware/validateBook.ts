@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 
 // creates and exports the middleware function
-export const validateAuthor = (
+export const validateBook = (
 
     req: Request,
     res: Response,
@@ -9,7 +9,7 @@ export const validateAuthor = (
 
 ) => {
 
-    
+
     const { title, year, authorId } = req.body;
 
     if (!title || typeof title !== 'string' || title.trim()  === '') {
