@@ -1,6 +1,7 @@
 import express from 'express';
 import authorsRoutes from './routes/authorsRoutes.js'
 import { logger } from './middleware/logger.js';
+import booksRoutes from './routes/booksRoutes.js';
 
 // creating the express app
 const app = express();
@@ -16,6 +17,9 @@ app.use(logger);
 
 // makes each route inside authorsRoutes.ts start with (/authors)
 app.use('/authors', authorsRoutes);
+
+// makes each route inside booksRoutes.ts start with (/books)
+app.use('/books', booksRoutes);
 
 // creates the apps first route
 app.get('/', (req, res) => {
