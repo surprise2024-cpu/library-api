@@ -35,5 +35,51 @@ router.get('/', (req, res) => {
     });
 });
 
+// router for getting an author by their id
+router.get('/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const author = authors.find((author) => author.id === id );
+
+    if (!author) {
+
+        return res.status(404).json({
+            success: false,
+            error: 'Author not found'
+        });
+    }
+
+    res.status(200).json({
+        success: true,
+        data: author
+    });
+
+});
+
+// router to update an authors information
+router.put('/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const author = authors.find((author) => author.id === id);
+
+    if (!author) {
+        return res.status(404).json({
+            success: false,
+            error: 'Author not found'
+        });
+    }
+
+    const { name } = req.body;
+
+    author.name = name;
+
+    res.status(200).json({
+        success: true,
+        data: author
+    });
+
+});
 // makes the router available to use all over the app
 export default router;
