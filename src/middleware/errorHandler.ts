@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 
-// allows an optional status 
+// allows an optional status codes
 type AppError = Error & {
     status?: number;
 };
