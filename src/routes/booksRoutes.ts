@@ -42,7 +42,7 @@ router.post('/', validateBook, (req, res) => {
 
     // makes ID generations safer
     const newBookId = 
-        authors.length === 0
+        books.length === 0
             ? 1
             : Math.max(...books.map((book) => book.id)) + 1
 

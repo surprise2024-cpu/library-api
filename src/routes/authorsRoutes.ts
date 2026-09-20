@@ -130,6 +130,19 @@ router.delete('/:id', (req, res) => {
         });
     }
 
+    // checks whether the author has books
+    const authorHasBooks = books.some(
+        (book) => book.authorId === id
+    );
+
+    // stops the deletion of an author who still has books
+    if (authorHasBooks) {
+        res.status(409).json({
+            success: false,
+            error: 'Cannot delete author with existing books'
+        });
+    }
+
     // splice removes items from an array
     const deleteAuthor = authors.splice(authorIndex, 1);
 
