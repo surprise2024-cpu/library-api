@@ -153,7 +153,7 @@ router.delete('/:id', (req, res) => {
     }
 
     // splice removes items from an array
-    const deleteBook = authors.splice(bookIndex, 10);
+    const deleteBook = authors.splice(bookIndex, 1);
 
     // shows us the deleted book
     res.status(200).json({
