@@ -36,28 +36,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// router for getting an author by their id
-router.get('/:id', (req, res) => {
-
-    const id = Number(req.params.id);
-
-    const author = authors.find((author) => author.id === id );
-
-    if (!author) {
-
-        return res.status(404).json({
-            success: false,
-            error: 'Author not found'
-        });
-    }
-
-    res.status(200).json({
-        success: true,
-        data: author
-    });
-
-});
-
 // router for getting books written by one author
 router.get('/:id/books', (req, res) => {
 
@@ -77,6 +55,28 @@ router.get('/:id/books', (req, res) => {
     const authorBooks = books.filter(
         (book) => book.authorId === id
     );
+
+    res.status(200).json({
+        success: true,
+        data: authorBooks
+    });
+
+});
+
+// router for getting an author by their id
+router.get('/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const author = authors.find((author) => author.id === id );
+
+    if (!author) {
+
+        return res.status(404).json({
+            success: false,
+            error: 'Author not found'
+        });
+    }
 
     res.status(200).json({
         success: true,
@@ -125,7 +125,7 @@ router.delete('/:id', (req, res) => {
     }
 
     // splice removes items from an array
-    const deleteAuthor = authors.splice(authorIndex, 10);
+    const deleteAuthor = authors.splice(authorIndex, 1);
 
     res.status(200).json({
         success: true,
