@@ -26,6 +26,20 @@ router.post('/', validateBook, (req, res) => {
         });
     }
 
+    // checks whether a book with the same title exists
+    const duplicateBook = books.find((book) => 
+        book.title.toLowerCase() === title.toLowerCase() &&
+        book.authorId === authorId
+    );   
+
+    // if a duplicate book exists, throw this error
+    if (duplicateBook) {
+        return res.status(409).json({
+            success: false,
+            error: 'Book already exists.'
+        })
+    }
+
     const newBook = {
         id: books.length + 1,
         title,
