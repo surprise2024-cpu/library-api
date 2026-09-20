@@ -17,7 +17,12 @@ The API supports CRUD operations, validation, author-book relationships, searchi
 
 ## Installation
 
-Close repository:
+Download Postman if you don't have it already
+
+https://www.postman.com/downloads/
+
+
+Clone repository:
 
 ```bash
 git clone https://github.com/surprise2024-cpu/library-api.git
@@ -62,7 +67,7 @@ http://localhost:4000
 POST /authors
 ```
 
-![Author creation]()
+![Author creation](/src/assets/author-creation.png)
 
 ---
 
@@ -84,7 +89,7 @@ POST /authors
 POST http://localhost:4000/books
 ```
 
-![Book creation]()
+![Book creation](/src/assets/book-creation.png)
 
 ---
 
@@ -94,7 +99,7 @@ POST http://localhost:4000/books
 GET http://localhost:4000/authors/1/books
 ```
 
-![Books by author 1]()
+![Books by author 1](/src/assets/get-books-written-by-an-author.png)
 
 ---
 
@@ -110,7 +115,7 @@ Search by title:
 GET http://localhost:4000/books?title=hamlet
 ```
 
-![search by title]()
+![search by title](/src/assets/search-by-title.png)
 
 ---
 
@@ -120,17 +125,7 @@ Search by author name:
 GET http://localhost:4000/books?author=shakespeare
 ```
 
-![Search by author name]()
-
----
-
-Filter by year:
-
-```text
-GET http://localhost:4000/books?title=1603
-```
-
-![Filter by year]()
+![Search by author name](/src/assets/search-by-author-name.png)
 
 ---
 
@@ -140,7 +135,7 @@ Filter by author ID:
 GET http://localhost:4000/books?authorId=1
 ```
 
-![Filter by author ID]()
+![Filter by author ID](/src/assets/filter-by-authorId.png)
 
 ---
 
@@ -150,7 +145,7 @@ Queries can also be combined
 GET http://localhost:4000/books?author=shakespeare&year=1603
 ```
 
-![Queries combined]()
+![Queries combined](/src/assets/combined-search.png)
 
 ---
 
@@ -161,7 +156,7 @@ Sort books by title
 GET http://localhost:4000/books?sort=title
 ```
 
-![Sort books by title]()
+![Sort books by title](/src/assets/search-by-title.png)
 
 ---
 
@@ -170,7 +165,7 @@ Sort books by year
 GET http://localhost:4000/books?sort=year
 ```
 
-![Sort books by year]()
+![Sort books by year](/src/assets/search-by-year.png)
 
 ---
 
@@ -179,7 +174,7 @@ Sort books in descending order
 GET http://localhost:4000/books?sort=year&order=desc
 ```
 
-![Sort books in descending order]()
+![Sort books in descending order](/src/assets/sort-year-descending.png)
 
 ---
 
@@ -190,8 +185,14 @@ Books can be split into pages using `page` and `limit`.
 ```text
 GET http://localhost:4000/books?page=1&limit=5
 ```
+Pagination Page 1:
 
-![pagination]()
+![pagination](/src/assets/pagination-test.png)
+
+
+Pagination Page 2:
+
+![pagination](/src/assets/pagination-test2.png)
 
 ---
 
@@ -225,7 +226,7 @@ The API uses standard HTTP status codes.
 
 Duplicate-book response:
 
-![Duplicate book]()
+![Duplicate book](/src/assets/duplicate-book-test.png)
 
 ---
 
