@@ -11,9 +11,15 @@ router.post('/', validateAuthor , (req, res) => {
     // gets the name from the JSON body
     const { name } = req.body;
 
+    // makes ID generation safer
+    const newAuthorId = 
+        authors.length === 0
+            ? 1
+            : Math.max(...authors.map((author) => author.id)) + 1
+
     // new object representing an author
     const newAuthor = {
-        id: authors.length + 1,
+        id: newAuthorId,
         name
     };
 
