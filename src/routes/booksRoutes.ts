@@ -62,7 +62,16 @@ router.post('/', validateBook, (req, res) => {
 router.get('/', (req, res) => {
 
 
-    const { title, year, authorId, author } = req.query;
+    const { 
+        title, 
+        year, 
+        authorId, 
+        author, 
+        sort, 
+        order,
+        page,
+        limit
+    } = req.query;
 
     // creates a copy of the books array so we don't change the original
     let filteredBooks = [...books];
@@ -109,9 +118,42 @@ router.get('/', (req, res) => {
         );
     } 
 
+    // localCompare() compares strings alphabetically
+    if (sort === 'title') {
+        filteredBooks.sort((a, b) => 
+            a.title.localeCompare(b.title)
+        );
+    }
+
+    // sorts in ascending order
+    if (sort === 'year') {
+        filteredBooks.sort((a, b) => 
+            a.year - (b.year)
+        );
+    }
+
+    // reverses the array
+    if (order === 'desc') {
+        filteredBooks.reverse();
+    }
+
+    const pageNumber = Number(page) || 1;
+    const limitNumber = Number(limit) || filteredBooks.length;
+
+    const startIndex = (pageNumber - 1) * limitNumber;
+    const endIndex = startIndex + limitNumber;
+
+    const paginatedBooks = filteredBooks.slice(
+        startIndex,
+        endIndex
+    );
+
     res.status(200).json({
         success: true,
-        data: filteredBooks
+        page: pageNumber,
+        limit: limitNumber,
+        total: filteredBooks.length,
+        data: paginatedBooks
     });
 
 });
