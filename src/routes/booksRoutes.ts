@@ -61,10 +61,37 @@ router.post('/', validateBook, (req, res) => {
 
 router.get('/', (req, res) => {
 
+    const { title, year, authorId } = req.query;
+
+    // creates a copy of the books array so we don't change the original
+    let filteredBooks = [...books];
+
+    if (title) {
+        
+        filteredBooks = filteredBooks.filter((book) => 
+            book.title.toLowerCase().includes(
+                String(title).toLowerCase()
+            )
+        );
+    }
+
+    if (year) {
+        filteredBooks = filteredBooks.filter(
+            (book) => book.year === Number(year)
+        );
+    }
+
+    if (authorId) {
+        filteredBooks = filteredBooks.filter(
+            (book) => book.authorId === Number(authorId)
+        );
+    }
+
     res.status(200).json({
         success: true,
-        data: books
+        data: filteredBooks
     });
+
 });
 
 // router for getting an author by their id
