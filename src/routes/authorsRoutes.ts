@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authors } from "../data/store.js";
+import { authors, books } from "../data/store.js";
 import { validateAuthor } from "../middleware/validateAuthor.js";
 
 // creating a new router object
@@ -50,6 +50,33 @@ router.get('/:id', (req, res) => {
             error: 'Author not found'
         });
     }
+
+    res.status(200).json({
+        success: true,
+        data: author
+    });
+
+});
+
+// router for getting books written by one author
+router.get('/:id/books', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const author = authors.find((author) => author.id === id );
+
+    if (!author) {
+
+        return res.status(404).json({
+            success: false,
+            error: 'Author not found'
+        });
+    }
+
+    // checks the books array for all books that match the condition (book.authorId === id)
+    const authorBooks = books.filter(
+        (book) => book.authorId === id
+    );
 
     res.status(200).json({
         success: true,
