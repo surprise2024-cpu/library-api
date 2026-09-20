@@ -61,7 +61,8 @@ router.post('/', validateBook, (req, res) => {
 
 router.get('/', (req, res) => {
 
-    const { title, year, authorId } = req.query;
+
+    const { title, year, authorId, author } = req.query;
 
     // creates a copy of the books array so we don't change the original
     let filteredBooks = [...books];
@@ -86,6 +87,27 @@ router.get('/', (req, res) => {
             (book) => book.authorId === Number(authorId)
         );
     }
+
+    // searching for a books via an authorId
+    if (author) {
+
+        // search the authors array first
+        const matchingAuthors = authors.filter((authorItem) => 
+            authorItem.name.toLowerCase().includes(
+                String(author).toLowerCase()
+            )
+        );
+
+        // turn it into an authorId
+        const matchingAuthorIds = matchingAuthors.map(
+            (authorItem) => authorItem.id
+        );
+
+        // keep the books thay match the authorId
+        filteredBooks = filteredBooks.filter((book) => 
+            matchingAuthorIds.includes(book.authorId)
+        );
+    } 
 
     res.status(200).json({
         success: true,
